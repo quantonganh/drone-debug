@@ -1,0 +1,27 @@
+workspace:
+  base: /go
+
+pipeline:
+  test:
+    image: golang:1.8
+    environment:
+      - CGO_ENABLED=0
+    commands:
+      - go build -ldflags "-s -w" -a -tags netgo
+
+  publish:
+    image: plugins/docker
+    repo: bclermont/drone-debug
+    tags:
+      - latest
+    when:
+      branch: master
+      event: push
+
+plugin:
+  name: Debug
+  desc: Dump environment variable
+  type: clone
+  image: bclermont/drone-debug
+  labels:
+    - dev
