@@ -19,7 +19,12 @@ func main() {
 	fmt.Println("Filesystem")
 	fmt.Println(separator)
 	_ = filepath.Walk("/", func(path string, info os.FileInfo, err error) error {
-		fmt.Printf("%s isdir:%t mode:%s modtime:%s size:%d\n", path, info.IsDir(), info.Mode().String(), info.ModTime().String(), info.Size())
+		if err != nil {
+			return err
+		}
+		if info != nil {
+			fmt.Printf("%s isdir:%t mode:%s modtime:%s size:%d\n", path, info.IsDir(), info.Mode().String(), info.ModTime().String(), info.Size())
+		}
 		return nil
 	})
 }
