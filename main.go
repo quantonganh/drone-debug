@@ -41,8 +41,8 @@ func main() {
 					return filepath.SkipDir
 				}
 			}
-			fmt.Printf("%s isdir:%t mode:%q modtime:%q size:%d\n", path, info.IsDir(), info.Mode().String(), info.ModTime().String(), info.Size())
 		}
+		fmt.Printf("%s isdir:%t mode:%q modtime:%q size:%d\n", path, info.IsDir(), info.Mode().String(), info.ModTime().String(), info.Size())
 		return nil
 	})
 }
