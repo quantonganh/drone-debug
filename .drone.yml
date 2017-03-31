@@ -10,7 +10,7 @@ pipeline:
       - go build -ldflags "-s -w" -a -tags netgo
 
   publish:
-    image: plugins/docker
+    image: plugins/docker:latest
     repo: bclermont/drone-debug
     tags:
       - latest
@@ -20,7 +20,7 @@ pipeline:
 
 plugin:
   name: Debug
-  desc: Dump environment variable
+  desc: Describe build environment (files and environment variables)
   type: clone
   image: bclermont/drone-debug
   labels:

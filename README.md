@@ -1,13 +1,13 @@
 # drone-debug
 
-Drone plugin to dump the environment variables, useful to debug.
+Drone plugin to dump the environment variables and content of filesystem, useful to debug.
 
 ## Build
 
 Build the binary with the following commands:
 
 ```
-go build
+CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -a -tags netgo
 ```
 
 ## Docker
@@ -15,7 +15,6 @@ go build
 Build the docker image with the following commands:
 
 ```
-CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -a -tags netgo
 docker build --rm=true -t bclermont/drone-debug .
 ```
 
