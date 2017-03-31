@@ -12,6 +12,13 @@ func main() {
 		empty = ""
 		separator = "---------------------------"
 	)
+	var skipDirs []string
+	if env := os.Getenv("PLUGIN_SKIP_DIRECTORIES"); len(env) > 0 {
+		skipDirs = strings.Split(env, ",")
+	} else {
+		skipDirs = make([]string, 0)
+	}
+
 	fmt.Println("Environment variables")
 	fmt.Println(separator)
 	fmt.Println(strings.Join(os.Environ(), "\n"))
@@ -22,7 +29,16 @@ func main() {
 		if err != nil {
 			return err
 		}
-		if info != nil {
+		if info == nil {
+			return nil
+		}
+
+		if info.IsDir() {
+			for _, skip := range skipDirs {
+				if path == skip {
+					return filepath.SkipDir
+				}
+			}
 			fmt.Printf("%s isdir:%t mode:%s modtime:%s size:%d\n", path, info.IsDir(), info.Mode().String(), info.ModTime().String(), info.Size())
 		}
 		return nil
