@@ -23,6 +23,8 @@ func main() {
 	fmt.Println(separator)
 	fmt.Println(strings.Join(os.Environ(), "\n"))
 	fmt.Println(empty)
+	fmt.Println(empty)
+	fmt.Println(empty)
 	fmt.Println("Filesystem")
 	fmt.Println(separator)
 	_ = filepath.Walk("/", func(path string, info os.FileInfo, err error) error {
