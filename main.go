@@ -19,6 +19,13 @@ func main() {
 		skipDirs = make([]string, 0)
 	}
 
+	cwd, err := os.Getwd()
+	if err != nil {
+		fmt.Println("Can't get current working directory:", err.Error())
+		os.Exit(1)
+	}
+	fmt.Println("Current working directory:", cwd)
+
 	fmt.Println("Environment variables")
 	fmt.Println(separator)
 	fmt.Println(strings.Join(os.Environ(), "\n"))
